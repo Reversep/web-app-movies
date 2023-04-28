@@ -1,0 +1,203 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/nouislider.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/plyr.css' %}">
+	<link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+	<link rel="stylesheet" href="{% static 'css/default-skin.css' %}">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+	<!-- Favicons -->
+	<link rel="icon" type="image/png" href="{% static 'img/logo3.svg' %}" sizes="32x32">
+	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="icon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="icon/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="icon/apple-touch-icon-144x144.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="body">
+
+	<header class="header">
+		<div class="header__wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__content">
+							<!-- header logo -->
+							<a href="{% url 'movie_list' %}" class="header__logo" style="background-color: transparent">
+								<img src="{% static 'img/logo3.svg' %}" alt="" style="width: 32%; height: auto; ">
+							</a>
+							<!-- end header logo -->
+
+							<!-- header nav -->
+							<ul class="header__nav">
+
+								<!-- dropdown -->
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="{% url 'movie_list' %}" role="button"  aria-haspopup="true" aria-expanded="false">Главная</a>
+
+								</li>
+								<!-- end dropdown -->
+
+								<!-- dropdown -->
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="#" role="button"  aria-haspopup="true" aria-expanded="false">Каталог</a>
+
+								</li>
+								<!-- end dropdown -->
+								{% if user.is_authenticated %}
+								<li class="header__nav-item">
+									<a href="{% url 'create_movie' %}" class="header__nav-link">+ Добавить фильм</a>
+								</li>
+								{% endif %}
+
+								<!-- dropdown -->
+<!--								<li class="dropdown header__nav-item">-->
+<!--									<a class="dropdown-toggle header__nav-link header__nav-link&#45;&#45;more" href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-ios-more"></i></a>-->
+
+<!--									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuMore">-->
+
+<!--									</ul>-->
+<!--								</li>-->
+								<!-- end dropdown -->
+							</ul>
+							<!-- end header nav -->
+
+							<!-- header auth -->
+							<div class="header__auth">
+<!--								<button class="header__search-btn" type="button">-->
+<!--									<i class="icon ion-ios-search"></i>-->
+<!--								</button>-->
+								{% if not user.is_authenticated %}
+									<a href="{% url 'login' %}" class="header__sign-in">
+									<i class="icon ion-ios-log-in"></i>
+									<span>Войти</span>
+									{% endif %}
+								{% if user.is_authenticated %}
+									<a href="{% url 'logout' %}" class="header__sign-in">
+									<i class="icon ion-ios-log-in"></i>
+									<span>Выйти</span>
+								{% endif %}
+								</a>
+								</a>
+							</div>
+							<!-- end header auth -->
+
+							<!-- header menu btn -->
+							<button class="header__btn" type="button">
+								<span></span>
+								<span></span>
+								<span></span>
+							</button>
+							<!-- end header menu btn -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- header search -->
+
+		<!-- end header search -->
+	</header>
+
+
+
+	<div class="container" style="margin-top: 20%">
+    <h1>Вы действительно хотите удалить фильм {{ item }} ?</h1>
+    <form action="{% url 'delete_movie' item.url %}" method="POST">
+        {% csrf_token %}
+        <a href="{% url 'movie_list' %}">Cancel</a>
+        <input type="submit" value="Подтвердить">
+    </form>
+	</div>
+
+	<div class="container">
+		<hr>
+	</div>
+
+		<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<!-- footer list -->
+				<div class="col-12 col-md-3">
+					<ul class="footer__app">
+						<li><a href="#"><img src="{% static 'img/logo3.svg' %}" alt="" style="size: 1px"></a></li>
+
+					</ul>
+				</div>
+				<!-- end footer list -->
+
+				<!-- footer list -->
+				<div class="col-6 col-sm-4 col-md-3">
+					<h6 class="footer__title">Онлайн кино</h6>
+					<ul class="footer__list">
+						<li><a href="#">Главная</a></li>
+						<li><a href="#">Каталог</a></li>
+						<li><a href="#">О нас</a></li>
+					</ul>
+				</div>
+				<!-- end footer list -->
+
+				<!-- footer list -->
+				<div class="col-6 col-sm-4 col-md-3">
+					<h6 class="footer__title">Права</h6>
+					<ul class="footer__list">
+						<li><a href="#">Гайды</a></li>
+						<li><a href="#">Конфиденциальность</a></li>
+						<li><a href="#">Безопасность</a></li>
+					</ul>
+				</div>
+				<!-- end footer list -->
+
+				<!-- footer list -->
+				<div class="col-12 col-sm-4 col-md-3">
+					<h6 class="footer__title">Контакт</h6>
+					<ul class="footer__list">
+						<li><a href="#">0555667788</a></li>
+						<li><a href="mailto:">codifylab.kg</a></li>
+					</ul>
+
+				</div>
+				<!-- end footer list -->
+
+				<!-- footer copyright -->
+				<div class="col-12">
+					<div class="footer__copyright">
+						<small><a target="_blank" href=""></a></small>
+
+						<ul>
+
+						</ul>
+					</div>
+				</div>
+				<!-- end footer copyright -->
+			</div>
+		</div>
+	</footer>
+	<!-- end footer -->
+
+	<!-- JS -->
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.mousewheel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.mCustomScrollbar.min.js' %}"></script>
+	<script src="{% static 'js/wNumb.js' %}"></script>
+	<script src="{% static 'js/nouislider.min.js' %}"></script>
+	<script src="{% static 'js/plyr.min.js' %}"></script>
+	<script src="{% static 'js/jquery.morelines.min.js' %}"></script>
+	<script src="{% static 'js/photoswipe.min.js' %}"></script>
+	<script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</body>
+</html>
