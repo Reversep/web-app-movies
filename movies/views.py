@@ -126,5 +126,19 @@ def login_request(request):
     return render(request=request, template_name="login.html", context={"login_form": form})
 
 
+@login_required()
+def logoutUser(request):
+    logout(request)
+    return redirect('/')
+
+
+def search(request):
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        movies = Movie.objects.filter(title__icontains=query)
+        return render(request, 'dashboard.html', {'movies': movies})
+    else:
+        return render(request, 'dashboard.html')
+
 
 

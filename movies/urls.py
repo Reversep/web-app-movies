@@ -7,6 +7,8 @@ urlpatterns = [
     path("login/", views.login_request, name='login'),
     path("logout/", views.logoutUser, name='logout'),
 
+    path('search/', views.search, name='search'),
+
     path("", views.MoviesView.as_view(), name="movie_list"),
     path("create_movie/", views.MovieCreate, name='create_movie'),
     path("<slug:slug>/", views.MoviesDetailView.as_view(), name="movie_detail"),
