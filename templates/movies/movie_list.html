@@ -117,6 +117,19 @@
 		</div>
 
 		<!-- header search -->
+				<form method="POST" action="{% url 'search' %}" class="header__search">
+  {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="header__search-content">
+          <input type="text" name="query" placeholder="Поиск фильмов">
+          <button type="submit">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
 
 		<!-- end header search -->
 	</header>
