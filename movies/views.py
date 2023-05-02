@@ -21,13 +21,13 @@ class GenreYear:
         return Movie.objects.filter(draft=False).values("year")
 
 
-class MoviesView(GenreYear, View):
+class MoviesView(View):
     def get(self, request):
         movies = Movie.objects.all()
         return render(request, 'movies/movie_list.html', {"movies": movies})
 
 
-class MoviesDetailView(GenreYear, View):
+class MoviesDetailView(View):
     def get(self, request, slug):
         try:
             movies = Movie.objects.get(url=slug)
@@ -66,17 +66,6 @@ def updateMovie(request, slug):
     return render(request, 'movie_forms.html', context)
 
 
-# def deleteMovie(request, slug):
-#     try:
-#         movies = Movie.objects.get(url=slug)
-#     except:
-#         movies = None
-#
-#     if request.method == 'POST':
-#         movies.delete()
-#         return redirect('/')
-#     context = {'item': movies}
-#     return render(request, 'delete.html', context)
 
 @login_required()
 def deleteMovie(request, slug):
@@ -91,20 +80,6 @@ def deleteMovie(request, slug):
     context = {'item': movies}
     return render(request, 'delete.html', context)
 
-
-# def loginPage(request):
-#
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-#
-#         if user is not None:
-#             login(request, user)
-#             return redirect('/')
-#
-#     context = {}
-#     return render(request, 'login.html', context)
 
 
 def login_request(request):
