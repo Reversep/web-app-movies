@@ -64,9 +64,6 @@
 
 							<!-- header auth -->
 							<div class="header__auth">
-								<button class="header__search-btn" type="button">-->
-									<i class="icon ion-ios-search"></i>-->
-								</button>-->
 								{% if not user.is_authenticated %}
 									<a href="{% url 'login' %}" class="header__sign-in">
 									<i class="icon ion-ios-log-in"></i>
@@ -96,6 +93,20 @@
 		</div>
 
 		<!-- header search -->
+
+    	<form method="POST" action="{% url 'search' %}" class="header__search">
+  {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="header__search-content">
+          <input type="text" name="query" placeholder="Поиск фильмов">
+          <button type="submit">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
 
 		<!-- end header search -->
 	</header>
